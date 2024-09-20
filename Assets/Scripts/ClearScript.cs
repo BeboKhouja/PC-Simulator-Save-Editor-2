@@ -6,5 +6,6 @@ public class ClearScript : MonoBehaviour
         PCSimulatorObject.DestroyAll();
         OpenFileScript.Contents = "";
         ObjectOnSelected.Visible = false;
+        SaveOptionsScript.Visible = false;
     }
 }

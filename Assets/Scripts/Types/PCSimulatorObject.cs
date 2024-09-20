@@ -1,6 +1,5 @@
 using UnityEngine;
 using Newtonsoft.Json.Linq;
-using System.Globalization;
 using System;
 
 public class PCSimulatorObject : MonoBehaviour

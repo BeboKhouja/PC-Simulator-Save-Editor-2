@@ -28,6 +28,19 @@ public class OpenFileScript : MonoBehaviour
                     contents = output;
                     string[] lines = output.Split(new []{ '\n' }, StringSplitOptions.RemoveEmptyEntries);
                     var jObject = JObject.Parse(lines[1]);
+                    var properties = JObject.Parse(lines[0]);
+                    SaveOptionsScript.Visible = true;
+                    SaveOptionsMenuScriot.AC = (bool) properties["ac"];
+                    SaveOptionsMenuScriot.Signer = (string) properties["sign"];
+                    SaveOptionsMenuScriot.Temperature = (float) properties["temperature"];
+                    SaveOptionsMenuScriot.SaveName = (string) properties["roomName"];
+                    SaveOptionsMenuScriot.Gravity = (bool) properties["gravity"];
+                    SaveOptionsMenuScriot.Hardcore = (bool) properties["hardcore"];
+                    SaveOptionsMenuScriot.Money = (int) properties["coin"];
+                    SaveOptionsMenuScriot.Light = (bool) properties["light"];
+                    SaveOptionsMenuScriot.Room = (int) properties["room"];
+                    SaveOptionsMenuScriot.Version = (string) properties["version"];
+                    SaveOptionsMenuScriot.Playtime = (float) properties["playtime"];
                     foreach (JObject obj in (JArray) jObject["itemData"]) {
                         var part = GameObject.CreatePrimitive(PrimitiveType.Cube);
                         part.name = (string) obj["spawnId"];
