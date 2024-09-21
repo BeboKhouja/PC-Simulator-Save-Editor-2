@@ -30,6 +30,7 @@ public class OpenFileScript : MonoBehaviour
                     var jObject = JObject.Parse(lines[1]);
                     var properties = JObject.Parse(lines[0]);
                     SaveOptionsScript.Visible = true;
+                    InsertObjectButton.Visible = true;
                     SaveOptionsMenuScriot.AC = (bool) properties["ac"];
                     SaveOptionsMenuScriot.Signer = (string) properties["sign"];
                     SaveOptionsMenuScriot.Temperature = (float) properties["temperature"];

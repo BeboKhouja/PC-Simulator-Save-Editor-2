@@ -1,6 +1,7 @@
 using UnityEngine;
 using Newtonsoft.Json.Linq;
 using System;
+using TransformHandles;
 
 public class PCSimulatorObject : MonoBehaviour
 {
@@ -38,13 +39,19 @@ public class PCSimulatorObject : MonoBehaviour
     private static event DestroyAllObj OnDestroy;
     private Outline outline;
 
+    private static TransformHandleManager handleManager;
+
     void Awake() {
+        handleManager = TransformHandleManager.Instance;
         this.parent = gameObject;
         this.outline = parent.AddComponent<Outline>();
         this.outline.OutlineColor = Color.blue;
         this.outline.enabled = false;
         ClearHitbox += () => this.outline.enabled = false;
         OnDestroy += () => Destroy();
+        gameObject.AddComponent<Ghost>(); 
+        Handle handl = handleManager.CreateHandle(transform);
+        handleManager.AddTarget(transform, handl);
     }
 
     void OnMouseUp() {
