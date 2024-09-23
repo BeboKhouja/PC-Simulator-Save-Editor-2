@@ -7,7 +7,7 @@ using UnityEngine;
 
 class ScroolAndPinch : MonoBehaviour
 {
-#if UNITY_IOS || UNITY_ANDROID
+#if UNITY_IOS || UNITY_ANDROID || UNITY_WSA || ENABLE_WINMD_SUPPORT
     public Camera Camera;
     public bool Rotate;
     protected Plane Plane;

@@ -2,8 +2,9 @@ using UnityEngine;
 using Newtonsoft.Json.Linq;
 using System;
 using TransformHandles;
+using UnityEngine.EventSystems;
 
-public class PCSimulatorObject : MonoBehaviour
+public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
 {
     private delegate void ClearHitboxHandler();
     public delegate void OnObjectSelectedHandler(PCSimulatorObject obj, bool selected);
@@ -49,25 +50,7 @@ public class PCSimulatorObject : MonoBehaviour
         this.outline.enabled = false;
         ClearHitbox += () => this.outline.enabled = false;
         OnDestroy += () => Destroy();
-        gameObject.AddComponent<Ghost>(); 
-        Handle handl = handleManager.CreateHandle(transform);
-        handleManager.AddTarget(transform, handl);
-    }
-
-    void OnMouseUp() {
-        this.selected = !this.selected;
-        OnObjectSelected?.Invoke(this, this.selected); // If no one subscribes to the event, then its null.
-        if (this.selected) {
-            ClearHitbox?.Invoke();
-            selectedObject = this;
-            ObjectOnSelected.SpawnId = selectedObject.spawnId;
-            ObjectOnSelected.Visible = true;
-        } else {
-            ClearHitbox?.Invoke();
-            selectedObject = null;
-            ObjectOnSelected.Visible = false;
-        }
-        this.outline.enabled = selected;
+        addPhysicsRaycaster();
     }
 
     // Make sure to call this instead of Destroy()
@@ -91,7 +74,7 @@ public class PCSimulatorObject : MonoBehaviour
         {
             Delegate[] clearHitboxList = ClearHitbox.GetInvocationList();
             foreach (Delegate d in clearHitboxList) {
-                ClearHitbox -= (d as ClearHitboxHandler);
+                ClearHitbox -= d as ClearHitboxHandler;
             }
         }
         
@@ -100,5 +83,31 @@ public class PCSimulatorObject : MonoBehaviour
 
     public static void DestroyAll() {
         OnDestroy?.Invoke();
+    }
+
+    void addPhysicsRaycaster()
+    {
+        PhysicsRaycaster physicsRaycaster = GameObject.FindObjectOfType<PhysicsRaycaster>();
+        if (physicsRaycaster == null)
+        {
+            Camera.main.gameObject.AddComponent<PhysicsRaycaster>();
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        this.selected = !this.selected;
+        OnObjectSelected?.Invoke(this, this.selected); // If no one subscribes to the event, then its null.
+        if (this.selected) {
+            ClearHitbox?.Invoke();
+            selectedObject = this;
+            ObjectOnSelected.SpawnId = selectedObject.spawnId;
+            ObjectOnSelected.Visible = true;
+        } else {
+            ClearHitbox?.Invoke();
+            selectedObject = null;
+            ObjectOnSelected.Visible = false;
+        }
+        this.outline.enabled = selected;
     }
 }

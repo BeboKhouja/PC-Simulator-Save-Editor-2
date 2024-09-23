@@ -1,8 +1,22 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ClearScript : MonoBehaviour
+public class ClearScript : MonoBehaviour, IPointerDownHandler
 {
-    void OnMouseUp() {
+    void Start() {
+        addPhysicsRaycaster();
+    }
+    void addPhysicsRaycaster()
+    {
+        PhysicsRaycaster physicsRaycaster = GameObject.FindObjectOfType<PhysicsRaycaster>();
+        if (physicsRaycaster == null)
+        {
+            Camera.main.gameObject.AddComponent<PhysicsRaycaster>();
+        }
+    }
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Debug.Log("Trig");
         PCSimulatorObject.DestroyAll();
         OpenFileScript.Contents = "";
         ObjectOnSelected.Visible = false;

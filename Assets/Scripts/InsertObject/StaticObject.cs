@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 public class StaticObject : MonoBehaviour
 {
     [SerializeField] public string SpawnID;
+    public GameObject Prefab;
 
     private void AddObject() {
         string[] lines = OpenFileScript.Contents.Split(new []{ '\n' }, StringSplitOptions.RemoveEmptyEntries);
@@ -31,10 +32,15 @@ public class StaticObject : MonoBehaviour
         itemData.Add(obj);
         lines[1] = jObject.ToString(Newtonsoft.Json.Formatting.None);
         OpenFileScript.Contents = string.Join("\n", lines);
-        var part = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        part.name = SpawnID;
-        part.transform.position = new Vector3(.0f, 3.0f, .0f);
-        part.transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
+        GameObject part;
+        if (Prefab != null) {
+            part = Instantiate(Prefab, new Vector3(.0f, 3.0f, .0f), new Quaternion(0.0f, 0.0f, 0.0f, 0.0f));
+        } else  {
+            part =  GameObject.CreatePrimitive(PrimitiveType.Cube);
+            part.name = SpawnID;
+            part.transform.position = new Vector3(.0f, 3.0f, .0f);
+            part.transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
+        }
         PCSimulatorObject PCSimulatorObj = part.AddComponent<PCSimulatorObject>();
         PCSimulatorObj.ID = id;
         PCSimulatorObj.SpawnId = SpawnID;
