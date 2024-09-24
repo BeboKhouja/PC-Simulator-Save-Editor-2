@@ -2481,6 +2481,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79af757bc8cfeed458961cfce2cf4f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m2SSDPrefab: {fileID: 9211445227897271572, guid: 437228eda38184043939512948858b2b, type: 3}
+  ssd128GBPrefab: {fileID: 522286987651120910, guid: 24c8efe93fd752440841d0f14db657ab, type: 3}
+  ssd256GBPrefab: {fileID: 8059120525845559609, guid: 5257f6c0a622c6b4d83b550638238db4, type: 3}
+  ssd512GBPrefab: {fileID: 4206738960775615364, guid: 9c79ba45fba9a6f4aab1633d990d668d, type: 3}
+  ssd1TBPrefab: {fileID: 5938313834080790248, guid: f65ca01a2b9d95d4f8725b0fa15a8ece, type: 3}
+  ssd2TBPrefab: {fileID: 7891454066827386657, guid: 52b05b39a2f3c5b42abd4c9e1a6246a6, type: 3}
+  ramPrefab: {fileID: 7114287532554955144, guid: 6ef906c7c66b8e44898d5e0b27e1373b, type: 3}
+  ramRGBPrefab: {fileID: 8343879860507535016, guid: c1bfe9f94c081294fbed839947abc4e3, type: 3}
+  hdd500GBPrefab: {fileID: 4638037242815305839, guid: 4c5008fb2c3c17243b47c1ad09b06255, type: 3}
+  hdd1TBPrefab: {fileID: 7362902110559723060, guid: d0577e808be46da4bb9196fd9aede49b, type: 3}
+  hdd2TBPrefab: {fileID: 4575931733506949389, guid: 24815d2a21b4e294a8d489ae6ae765e9, type: 3}
+  hdd5TBPrefab: {fileID: 6157148350943292736, guid: 0cb4133bae0c4794a8428a94f7228c18, type: 3}
+  psu300WPrefab: {fileID: 6980028927140159630, guid: 638f51ec164cce84789219764227ef9f, type: 3}
+  psu500WPrefab: {fileID: 6525945885012706494, guid: 88ce4ba6caef4f944bb90eca88bc3b61, type: 3}
+  psu1000WPrefab: {fileID: 1948980176758614285, guid: 638ffb09b1ac806428098d759385cf59, type: 3}
+  psu2000WPrefab: {fileID: 3463450082033713074, guid: a684af6ac0449ea40ac2a6394e817eda, type: 3}
   titanVPrefab: {fileID: 3947092688713409120, guid: 49d71eb9c09a28c4cbef193ef51c6178, type: 3}
   pillowPrefab: {fileID: 8093878137033204605, guid: 8f95eff8326c6ec479b37436699eb164, type: 3}
   projectorPrefab: {fileID: 1004082175969410670, guid: 8b20c0fac3f26c84eaaf9b5bea61a3d4, type: 3}
@@ -3651,8 +3667,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1794063046}
   m_HandleRect: {fileID: 1794063045}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.6666667
+  m_Value: 0.9999997
+  m_Size: 0.6666666
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5637,7 +5653,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 120.00001
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -5663,8 +5679,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18889515, y: -0, z: -0, w: 0.98199725}
-  m_LocalPosition: {x: -22.35, y: 9.25, z: -39.45}
+  m_LocalRotation: {x: -0.35459402, y: -0.039818976, z: 0.014697687, w: -0.9340565}
+  m_LocalPosition: {x: -15.740171, y: 8.130589, z: -45.564354}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8385,7 +8401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnID: Pillow
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 8093878137033204605, guid: 8f95eff8326c6ec479b37436699eb164, type: 3}
 --- !u!1 &1432905276
 GameObject:
   m_ObjectHideFlags: 0

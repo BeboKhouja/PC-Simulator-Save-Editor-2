@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using System;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class OpenFileScript : MonoBehaviour, IPointerDownHandler
 {
@@ -13,6 +14,22 @@ public class OpenFileScript : MonoBehaviour, IPointerDownHandler
         set {contents = value;}
     }
 
+    public GameObject m2SSDPrefab;
+    public GameObject ssd128GBPrefab;
+    public GameObject ssd256GBPrefab;
+    public GameObject ssd512GBPrefab;
+    public GameObject ssd1TBPrefab;
+    public GameObject ssd2TBPrefab;
+    public GameObject ramPrefab;
+    public GameObject ramRGBPrefab;
+    public GameObject hdd500GBPrefab;
+    public GameObject hdd1TBPrefab;
+    public GameObject hdd2TBPrefab;
+    public GameObject hdd5TBPrefab;
+    public GameObject psu300WPrefab;
+    public GameObject psu500WPrefab;
+    public GameObject psu1000WPrefab;
+    public GameObject psu2000WPrefab;
     public GameObject titanVPrefab;
     public GameObject pillowPrefab;
     public GameObject projectorPrefab;
@@ -94,6 +111,18 @@ public class OpenFileScript : MonoBehaviour, IPointerDownHandler
                         else if (spawnId == "GT440") part = Instantiate(GT440Prefab, getPos(), getRot());
                         else if (spawnId == "Titan V") part = Instantiate(titanVPrefab, getPos(), getRot());
                         else if (spawnId == "Pillow") part = Instantiate(pillowPrefab, getPos(), getRot());
+                        else if (spawnId == "SSD_M.2 128GB" || spawnId == "SSD_M.2 256GB" || spawnId == "SSD_M.2 512GB" || spawnId == "SSD_M.2 1TB") part = Instantiate(m2SSDPrefab, getPos(), getRot());
+                        else if (spawnId == "RAM 1GB" || spawnId == "RAM 2GB" || spawnId == "RAM 4GB" || spawnId == "RAM 8GB" || spawnId == "RAM 16GB" || spawnId == "RAM 32GB") part = Instantiate(ramPrefab, getPos(), getRot());
+                        else if (spawnId == "RAM 4GB(RGB)" || spawnId == "RAM 8GB(RGB)" || spawnId == "RAM 16GB(RGB)" || spawnId == "RAM 32GB(RGB)") part = Instantiate(ramRGBPrefab, getPos(), getRot());
+                        else if (spawnId == "SSD 128GB") part = Instantiate(ssd128GBPrefab, getPos(), getRot());
+                        else if (spawnId == "SSD 256GB") part = Instantiate(ssd256GBPrefab, getPos(), getRot());
+                        else if (spawnId == "SSD 512GB") part = Instantiate(ssd512GBPrefab, getPos(), getRot());
+                        else if (spawnId == "SSD 1TB") part = Instantiate(ssd1TBPrefab, getPos(), getRot());
+                        else if (spawnId == "SSD 2TB") part = Instantiate(ssd2TBPrefab, getPos(), getRot());
+                        else if (spawnId == "HDD 500GB") part = Instantiate(hdd500GBPrefab, getPos(), getRot());
+                        else if (spawnId == "HDD 1TB") part = Instantiate(hdd1TBPrefab, getPos(), getRot());
+                        else if (spawnId == "HDD 2TB") part = Instantiate(hdd2TBPrefab, getPos(), getRot());
+                        else if (spawnId == "HDD 5TB") part = Instantiate(hdd5TBPrefab, getPos(), getRot());
                         else {
                             part = GameObject.CreatePrimitive(PrimitiveType.Cube);
                             part.name = (string) obj["spawnId"];

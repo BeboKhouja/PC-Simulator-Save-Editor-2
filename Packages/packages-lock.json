@@ -7,6 +7,15 @@
       "dependencies": {},
       "hash": "4cf2a8b44ba6ab1cbf3d14caf365f49fb53225ee"
     },
+    "com.unity.cinemachine": {
+      "version": "2.10.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.test-framework": "1.1.31"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.collab-proxy": {
       "version": "2.4.4",
       "depth": 0,
@@ -95,6 +104,15 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.recorder": {
+      "version": "4.0.3",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.timeline": "1.0.0"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.settings-manager": {
