@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.orkunmanap.runtime-transform-handles": "https://github.com/manaporkun/UnityRuntimeTransformHandles.git?path=/Packages/runtime-transform-handles",
+    "com.orkunmanap.runtime-transform-handles": "https://github.com/BeboKhouja/UnityRuntimeTransformHandles.git?path=/Packages/runtime-transform-handles",
     "com.unity.cinemachine": "2.10.1",
     "com.unity.collab-proxy": "2.4.4",
     "com.unity.feature.development": "1.0.1",

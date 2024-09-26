@@ -6,7 +6,7 @@ public class MoveMouse : MonoBehaviour
     [SerializeField] private Camera camera;
 
     void Start() {
-        Input.simulateMouseWithTouches = false; /*
+        Input.simulateMouseWithTouches = true; /*
             We dont want to accidentally trigger the mouse when using the touch screen while pressing 2 fingers,
             but then that has the side effect of not being able to click the buttons on the world.
         */
