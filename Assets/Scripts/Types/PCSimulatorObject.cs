@@ -137,12 +137,14 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
         selected = !selected;
         if (!selected && eventData.clickCount >= 1) {
             ObjectOnSelected.Visible = false;
+            ClearHitbox?.Invoke();
             selectedObject = null;
             OnObjectSelected?.Invoke(this, false); // If no one subscribes to the event, then its null.
             handle.Disable();
         } else {
             selectedObject = this;
             ObjectOnSelected.SpawnId = selectedObject.spawnId;
+            ClearHitbox?.Invoke();
             ObjectOnSelected.Visible = true;
             OnObjectSelected?.Invoke(this, true); // If no one subscribes to the event, then its null.
             handle.Enable(transform);
