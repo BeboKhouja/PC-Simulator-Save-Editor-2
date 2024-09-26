@@ -11,6 +11,15 @@ class ScroolAndPinch : MonoBehaviour
     public Camera Camera;
     public bool Rotate;
     protected Plane Plane;
+    private static bool ThisEnabled = true;
+    public static bool Enabled // this prevents moving the camera when moving objects with the transform handle
+    {
+        get {return ThisEnabled;}
+        set 
+        {
+            ThisEnabled = value;
+        }
+    } 
 
     private void Awake()
     {
@@ -21,6 +30,7 @@ class ScroolAndPinch : MonoBehaviour
 
     private void Update()
     {
+        if (!ThisEnabled) return;
 
         //Update Plane
         if (Input.touchCount >= 1)

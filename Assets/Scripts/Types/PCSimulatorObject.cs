@@ -22,7 +22,7 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
             JArray itemData = (JArray) jObject["itemData"];
         
             foreach(JObject obj in itemData) {
-                if ((int) itemData[i]["id"] == this.ID) {
+                if ((int) itemData[i]["id"] == ID) {
                    itemData[i]["spawnId"] = spawnId;
                    Debug.Log((string) itemData[i]["spawnId"]);
                    break;
@@ -42,15 +42,47 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
 
     private static TransformHandleManager handleManager;
 
+    
+
     void Awake() {
         handleManager = TransformHandleManager.Instance;
-        this.parent = gameObject;
-        this.outline = parent.AddComponent<Outline>();
-        this.outline.OutlineColor = Color.blue;
-        this.outline.enabled = false;
-        ClearHitbox += () => this.outline.enabled = false;
+        parent = gameObject;
+        outline = parent.AddComponent<Outline>();
+        outline.OutlineColor = Color.blue;
+        outline.enabled = false;
+        ClearHitbox += () => handle.Disable();
         OnDestroy += () => Destroy();
         addPhysicsRaycaster();
+        handle = handleManager.CreateHandle(transform);
+        handle.OnInteractionEndEvent += OnInteract;
+        handle.OnInteractionEvent += (Handle handl) => ScroolAndPinch.Enabled = false;
+        handle.Disable();
+    }
+
+    private void OnInteract(Handle handle)
+    {
+        Debug.Log("Called");
+        ScroolAndPinch.Enabled = true;
+        string[] lines = OpenFileScript.Contents.Split(new []{ '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        var jObject = JObject.Parse(lines[1]);
+        int i = 0;
+        
+        foreach(JObject obj in (JArray) jObject["itemData"]) {
+            if ((int) ((JArray)jObject["itemData"])[i]["id"] == ID) {
+                Debug.Log("Found one");
+                ((JArray) jObject["itemData"])[i]["pos"]["x"] = transform.position.x;
+                ((JArray) jObject["itemData"])[i]["pos"]["y"] = Math.Abs(transform.position.y) - 1.0f; // Compensating for elevation
+                ((JArray) jObject["itemData"])[i]["pos"]["z"] = transform.position.z;
+                ((JArray) jObject["itemData"])[i]["rot"]["x"] = transform.rotation.x;
+                ((JArray) jObject["itemData"])[i]["rot"]["y"] = transform.rotation.y;
+                ((JArray) jObject["itemData"])[i]["rot"]["z"] = transform.rotation.z;
+                ((JArray) jObject["itemData"])[i]["rot"]["w"] = transform.rotation.w;
+                break;
+            }
+            i++;
+        }
+        lines[1] = jObject.ToString(Newtonsoft.Json.Formatting.None);
+        OpenFileScript.Contents = string.Join('\n', lines);
     }
 
     // Make sure to call this instead of Destroy()
@@ -60,7 +92,7 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
         int i = 0;
         
         foreach(JObject obj in (JArray) jObject["itemData"]) {
-            if ((int) ((JArray)jObject["itemData"])[i]["id"] == this.ID) {
+            if ((int) ((JArray)jObject["itemData"])[i]["id"] == ID) {
                 Debug.Log("Found one");
                 ((JArray) jObject["itemData"]).RemoveAt(i);
                 break;
@@ -77,6 +109,10 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
                 ClearHitbox -= d as ClearHitboxHandler;
             }
         }
+
+        handle.OnInteractionEndEvent -= OnInteract;
+        handle.OnInteractionEvent -= (Handle handl) => ScroolAndPinch.Enabled = false;
+        handleManager.RemoveHandle(handle);
         
         Destroy(parent);
     }
@@ -94,20 +130,22 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
         }
     }
 
+    public Handle handle;
+
     public void OnPointerDown(PointerEventData eventData)
     {
-        this.selected = !this.selected;
-        OnObjectSelected?.Invoke(this, this.selected); // If no one subscribes to the event, then its null.
-        if (this.selected) {
-            ClearHitbox?.Invoke();
+        selected = !selected;
+        if (!selected && eventData.clickCount >= 1) {
+            ObjectOnSelected.Visible = false;
+            selectedObject = null;
+            OnObjectSelected?.Invoke(this, false); // If no one subscribes to the event, then its null.
+            handle.Disable();
+        } else {
             selectedObject = this;
             ObjectOnSelected.SpawnId = selectedObject.spawnId;
             ObjectOnSelected.Visible = true;
-        } else {
-            ClearHitbox?.Invoke();
-            selectedObject = null;
-            ObjectOnSelected.Visible = false;
+            OnObjectSelected?.Invoke(this, true); // If no one subscribes to the event, then its null.
+            handle.Enable(transform);
         }
-        this.outline.enabled = selected;
     }
 }
