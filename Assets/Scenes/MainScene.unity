@@ -1188,7 +1188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f0e8b8e7f560c4b8ff6f461c4775c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Camera: {fileID: 0}
+  Camera: {fileID: 963194227}
   Rotate: 1
 --- !u!114 &94268457
 MonoBehaviour:
@@ -1208,7 +1208,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  highlightColor: {r: 0, g: 0.38429976, b: 1, a: 1}
+  highlightColor: {r: 0, g: 0.19849801, b: 1, a: 1}
   positionShortcut: 112
   rotationShortcut: 114
   scaleShortcut: 0
@@ -5114,8 +5114,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1794063046}
   m_HandleRect: {fileID: 1794063045}
   m_Direction: 2
-  m_Value: 0.7763377
-  m_Size: 0.39999992
+  m_Value: 0.7763376
+  m_Size: 0.39999995
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11594,7 +11594,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1272500703}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

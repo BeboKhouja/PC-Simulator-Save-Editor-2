@@ -42,7 +42,6 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
 
     private static TransformHandleManager handleManager;
 
-    
 
     void Awake() {
         handleManager = TransformHandleManager.Instance;
@@ -123,7 +122,7 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
 
     void addPhysicsRaycaster()
     {
-        PhysicsRaycaster physicsRaycaster = GameObject.FindObjectOfType<PhysicsRaycaster>();
+        PhysicsRaycaster physicsRaycaster = FindObjectOfType<PhysicsRaycaster>();
         if (physicsRaycaster == null)
         {
             Camera.main.gameObject.AddComponent<PhysicsRaycaster>();
@@ -132,10 +131,11 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
 
     public Handle handle;
 
+
     public void OnPointerDown(PointerEventData eventData)
     {
         selected = !selected;
-        if (!selected && eventData.clickCount >= 1) {
+        if (selected && eventData.clickCount >= 1) {
             ObjectOnSelected.Visible = false;
             ClearHitbox?.Invoke();
             selectedObject = null;

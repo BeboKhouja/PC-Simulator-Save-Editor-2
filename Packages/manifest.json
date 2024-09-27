@@ -1,12 +1,13 @@
 {
   "dependencies": {
-    "com.orkunmanap.runtime-transform-handles": "https://github.com/BeboKhouja/UnityRuntimeTransformHandles.git?path=/Packages/runtime-transform-handles",
+    "com.orkunmanap.runtime-transform-handles": "https://github.com/BeboKhouja/UnityRuntimeTransformHandles.git?path=/Packages/runtime-transform-handles#workaround_onmouseup",
     "com.unity.cinemachine": "2.10.1",
     "com.unity.collab-proxy": "2.4.4",
     "com.unity.feature.development": "1.0.1",
     "com.unity.inputsystem": "1.7.0",
     "com.unity.mobile.android-logcat": "1.4.3",
     "com.unity.nuget.newtonsoft-json": "3.0.2",
+    "com.unity.probuilder": "5.2.3",
     "com.unity.recorder": "4.0.3",
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.timeline": "1.7.6",
@@ -44,13 +45,5 @@
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
   },
-  "scopedRegistries": [
-    {
-      "name": "Shtif Registry",
-      "url": "http://package.binaryego.com:4873",
-      "scopes": [
-        "com.shtif"
-      ]
-    }
-  ]
+  "scopedRegistries": []
 }

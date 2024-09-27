@@ -1,11 +1,11 @@
 {
   "dependencies": {
     "com.orkunmanap.runtime-transform-handles": {
-      "version": "https://github.com/BeboKhouja/UnityRuntimeTransformHandles.git?path=/Packages/runtime-transform-handles",
+      "version": "https://github.com/BeboKhouja/UnityRuntimeTransformHandles.git?path=/Packages/runtime-transform-handles#workaround_onmouseup",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "e23645d6d02863dd7969d0589e12f9cdb481e08b"
+      "hash": "8d9dbe058c1f15f2595194e847054a16edd2e07e"
     },
     "com.unity.cinemachine": {
       "version": "2.10.1",
@@ -106,6 +106,17 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.probuilder": {
+      "version": "5.2.3",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.imgui": "1.0.0",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.settings-manager": "1.0.3"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.recorder": {
       "version": "4.0.3",
       "depth": 0,
@@ -117,7 +128,7 @@
     },
     "com.unity.settings-manager": {
       "version": "2.0.1",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
