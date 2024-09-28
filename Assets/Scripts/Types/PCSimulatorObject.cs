@@ -12,7 +12,7 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
     public GameObject parent;
     public int ID;
     private string spawnId;
-    public string SpawnId{
+    [SerializeField] public string SpawnId{
         get {return spawnId;}
         set {
             spawnId = value;
@@ -54,14 +54,19 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
         addPhysicsRaycaster();
         handle = handleManager.CreateHandle(transform);
         handle.OnInteractionEndEvent += OnInteract;
+        #if UNITY_IOS || UNITY_ANDROID
         handle.OnInteractionEvent += (Handle handl) => ScroolAndPinch.Enabled = false;
+        #endif // Prevent an error when compiling for platforms other than UWP, Android, iOS, since the class is conditional compilation.
         handle.Disable();
     }
 
     private void OnInteract(Handle handle)
     {
+        
         Debug.Log("Called");
+        #if UNITY_IOS || UNITY_ANDROID
         ScroolAndPinch.Enabled = true;
+        #endif
         string[] lines = OpenFileScript.Contents.Split(new []{ '\n' }, StringSplitOptions.RemoveEmptyEntries);
         var jObject = JObject.Parse(lines[1]);
         int i = 0;
@@ -84,9 +89,14 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
         OpenFileScript.Contents = string.Join('\n', lines);
     }
 
+    public static void ClearAllHitboxes() {
+        ClearHitbox?.Invoke();
+    }
+
     // Make sure to call this instead of Destroy()
     public void Destroy() {
         string[] lines = OpenFileScript.Contents.Split(new []{ '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        if (1 > lines.Length) return; // Prevent an error when the file is empty
         var jObject = JObject.Parse(lines[1]);
         int i = 0;
         
@@ -101,16 +111,12 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
         lines[1] = jObject.ToString(Newtonsoft.Json.Formatting.None);
         OpenFileScript.Contents = string.Join('\n', lines);
 
-        if (ClearHitbox != null)
-        {
-            Delegate[] clearHitboxList = ClearHitbox.GetInvocationList();
-            foreach (Delegate d in clearHitboxList) {
-                ClearHitbox -= d as ClearHitboxHandler;
-            }
-        }
+        ClearHitbox -= () => handle.Disable();
 
         handle.OnInteractionEndEvent -= OnInteract;
+        #if UNITY_IOS || UNITY_ANDROID
         handle.OnInteractionEvent -= (Handle handl) => ScroolAndPinch.Enabled = false;
+        #endif
         handleManager.RemoveHandle(handle);
         
         Destroy(parent);
@@ -134,6 +140,7 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left) return; // Only trig if left clicked
         selected = !selected;
         if (selected && eventData.clickCount >= 1) {
             ObjectOnSelected.Visible = false;

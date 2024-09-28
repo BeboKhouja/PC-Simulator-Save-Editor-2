@@ -7,7 +7,7 @@ using UnityEngine;
 
 class ScroolAndPinch : MonoBehaviour
 {
-#if UNITY_IOS || UNITY_ANDROID || UNITY_WSA || ENABLE_WINMD_SUPPORT
+#if UNITY_IOS || UNITY_ANDROID || UNITY_WSA
     public Camera Camera;
     public bool Rotate;
     protected Plane Plane;
@@ -71,7 +71,7 @@ class ScroolAndPinch : MonoBehaviour
         }
 
     }
-
+    
     protected Vector3 PlanePositionDelta(Touch touch)
     {
         //not moved

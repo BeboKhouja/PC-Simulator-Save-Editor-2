@@ -16,7 +16,9 @@ public class ClearScript : MonoBehaviour, IPointerDownHandler
     }
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left) return;
         Debug.Log("Trig");
+        PCSimulatorObject.ClearAllHitboxes();
         PCSimulatorObject.DestroyAll();
         OpenFileScript.Contents = "";
         ObjectOnSelected.Visible = false;

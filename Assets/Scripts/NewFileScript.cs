@@ -6,6 +6,8 @@ public class NewFileScript : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left) return;
+        PCSimulatorObject.ClearAllHitboxes();
         PCSimulatorObject.DestroyAll();
         OpenFileScript.Contents = "";
         ObjectOnSelected.Visible = false;

@@ -4,6 +4,7 @@ using System.IO;
 using System;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
+using SFB;
 
 public class OpenFileScript : MonoBehaviour, IPointerDownHandler
 {
@@ -48,14 +49,10 @@ public class OpenFileScript : MonoBehaviour, IPointerDownHandler
     public GameObject GT440Prefab;
     public GameObject HammerPrefab;
     [SerializeField] public string MimeType;
+    [SerializeField] public string Extension;
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if( NativeFilePicker.IsFilePickerBusy() )
-			return;
-        NativeFilePicker.Permission permission = NativeFilePicker.PickFile( ( path ) =>
-			{
-				if( path != null ) 
+    private void ReadFile(string path) {
+        if( path != null ) 
                 {
                     PCSimulatorObject.DestroyAll();
                     Contents = "";
@@ -136,6 +133,20 @@ public class OpenFileScript : MonoBehaviour, IPointerDownHandler
                         part.transform.parent = GameObject.Find("Parts").transform;
                 }
                     }
-			}, new string[] { MimeType } );
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (eventData.button != PointerEventData.InputButton.Left) return;
+        #if UNITY_ANDROID || UNITY_IOS
+        if( NativeFilePicker.IsFilePickerBusy() )
+			return;
+        NativeFilePicker.Permission permission = NativeFilePicker.PickFile( ( path ) => ReadFile(path), new string[] { MimeType } );
+        #elif UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX || UNITY_EDITOR
+        StandaloneFileBrowser.OpenFilePanelAsync("Open PC Simulator save", "", Extension, false, (string[] paths) => {
+            if (string.IsNullOrEmpty(paths[0])) return;
+            ReadFile(paths[0]);
+        });
+        #endif
     }
 }
