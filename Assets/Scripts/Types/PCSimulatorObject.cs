@@ -54,7 +54,7 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
         addPhysicsRaycaster();
         handle = handleManager.CreateHandle(transform);
         handle.OnInteractionEndEvent += OnInteract;
-        #if UNITY_IOS || UNITY_ANDROID
+        #if UNITY_IOS || UNITY_ANDROID || UNITY_WSA || UNITY_WEBGL
         handle.OnInteractionEvent += (Handle handl) => ScroolAndPinch.Enabled = false;
         #endif // Prevent an error when compiling for platforms other than UWP, Android, iOS, since the class is conditional compilation.
         handle.Disable();
@@ -64,7 +64,7 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
     {
         
         Debug.Log("Called");
-        #if UNITY_IOS || UNITY_ANDROID
+        #if UNITY_IOS || UNITY_ANDROID || UNITY_WSA || UNITY_WEBGL
         ScroolAndPinch.Enabled = true;
         #endif
         string[] lines = OpenFileScript.Contents.Split(new []{ '\n' }, StringSplitOptions.RemoveEmptyEntries);
@@ -93,7 +93,7 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
         ClearHitbox?.Invoke();
     }
 
-    // Make sure to call this instead of Destroy()
+    // * Make sure to call this instead of Destroy()
     public void Destroy() {
         string[] lines = OpenFileScript.Contents.Split(new []{ '\n' }, StringSplitOptions.RemoveEmptyEntries);
         if (1 > lines.Length) return; // Prevent an error when the file is empty
@@ -114,7 +114,7 @@ public class PCSimulatorObject : MonoBehaviour, IPointerDownHandler
         ClearHitbox -= () => handle.Disable();
 
         handle.OnInteractionEndEvent -= OnInteract;
-        #if UNITY_IOS || UNITY_ANDROID
+        #if UNITY_IOS || UNITY_ANDROID || UNITY_WSA || UNITY_WEBGL
         handle.OnInteractionEvent -= (Handle handl) => ScroolAndPinch.Enabled = false;
         #endif
         handleManager.RemoveHandle(handle);

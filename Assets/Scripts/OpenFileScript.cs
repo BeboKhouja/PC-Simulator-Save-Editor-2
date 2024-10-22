@@ -3,8 +3,6 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using System;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
-using SFB;
 
 public class OpenFileScript : MonoBehaviour, IPointerDownHandler
 {
@@ -48,6 +46,32 @@ public class OpenFileScript : MonoBehaviour, IPointerDownHandler
     public GameObject GT1030Prefab;
     public GameObject GT440Prefab;
     public GameObject HammerPrefab;
+    public GameObject USBDrivePrefab;
+    public GameObject CaseMinerPrefab;
+    public GameObject CaseTestBenchPrefab;
+    public GameObject CaseATXGlassBlackPrefab;
+    public GameObject CaseATXGlassWhitePrefab;
+    public GameObject CaseATXSolidBlackPrefab;
+    public GameObject CaseATXSolidWhitePrefab;
+    public GameObject CaseITXBlackPrefab;
+    public GameObject CaseITXWhitePrefab;
+    public GameObject CaseITXBluePrefab;
+    public GameObject CaseITXRedPrefab;
+    public GameObject CaseITXGreenPrefab;
+    public GameObject CaseITXYellowPrefab;
+    public GameObject CaseATXCoverBlackPrefab;
+    public GameObject CaseATXCoverWhitePrefab;
+    public GameObject CaseATXCoverGlassPrefab;
+    public GameObject CaseITXCoverBlackPrefab;
+    public GameObject CaseITXCoverWhitePrefab;
+    public GameObject CaseITXCoverGlassPrefab;
+    public GameObject GiftPrefab;
+    public GameObject BoxRemovalBombPrefab;
+    public GameObject CarrotPrefab;
+    public GameObject ApsonA3Prefab;
+    public GameObject BitcoinPrefab;
+    public GameObject MonitorStandPrefab;
+    public GameObject CPUIntelPrefab;
     [SerializeField] public string MimeType;
     [SerializeField] public string Extension;
 
@@ -91,7 +115,9 @@ public class OpenFileScript : MonoBehaviour, IPointerDownHandler
                         Quaternion getRot() {
                             return new Quaternion((float) obj["rot"]["x"], (float) Math.Abs((float) obj["rot"]["y"]), (float) obj["rot"]["z"], (float) obj["rot"]["w"]);
                         }
+                    
                         if (spawnId == "Projector") part = Instantiate(projectorPrefab, getPos(), getRot());
+                        
                         else if (spawnId == "FlatMonitor") part = Instantiate(flatMonitorPrefab, getPos(), getRot());
                         else if (spawnId == "Hammer") part = Instantiate(HammerPrefab, getPos(), getRot());
                         else if (spawnId == "RTX4080Ti") part = Instantiate(RTX4080TiPrefab, getPos(), getRot());
@@ -120,6 +146,37 @@ public class OpenFileScript : MonoBehaviour, IPointerDownHandler
                         else if (spawnId == "HDD 1TB") part = Instantiate(hdd1TBPrefab, getPos(), getRot());
                         else if (spawnId == "HDD 2TB") part = Instantiate(hdd2TBPrefab, getPos(), getRot());
                         else if (spawnId == "HDD 5TB") part = Instantiate(hdd5TBPrefab, getPos(), getRot());
+                        else if (spawnId == "FlashDrive") part = Instantiate(USBDrivePrefab, getPos(), getRot());
+                        else if (spawnId == "TestBench") part = Instantiate(CaseTestBenchPrefab, getPos(), getRot());
+                        else if (spawnId == "Miner") part = Instantiate(CaseMinerPrefab, getPos(), getRot());
+                        else if (spawnId == "Case_ATX(Black)") part = Instantiate(CaseATXSolidBlackPrefab, getPos(), getRot());
+                        else if (spawnId == "Case_ATX(White)") part = Instantiate(CaseATXSolidWhitePrefab, getPos(), getRot());
+                        else if (spawnId == "Case_ATX 2(Black)") part = Instantiate(CaseATXGlassBlackPrefab, getPos(), getRot());
+                        else if (spawnId == "Case_ATX 2(White)") part = Instantiate(CaseATXGlassWhitePrefab, getPos(), getRot());
+                        else if (spawnId == "Case_ITX(Black)") part = Instantiate(CaseITXBlackPrefab, getPos(), getRot());
+                        else if (spawnId == "Case_ITX(White)") part = Instantiate(CaseITXWhitePrefab, getPos(), getRot());
+                        else if (spawnId == "Case_ITX(Green)") part = Instantiate(CaseITXGreenPrefab, getPos(), getRot());
+                        else if (spawnId == "Case_ITX(Yellow)") part = Instantiate(CaseITXYellowPrefab, getPos(), getRot());
+                        else if (spawnId == "Case_ITX(Red)") part = Instantiate(CaseITXRedPrefab, getPos(), getRot());
+                        else if (spawnId == "Case_ATX(Blue)") part = Instantiate(CaseITXBluePrefab, getPos(), getRot());
+                        else if (spawnId == "Cover_ATX(Black)") part = Instantiate(CaseATXCoverBlackPrefab, getPos(), getRot());
+                        else if (spawnId == "Cover_ATX(White)") part = Instantiate(CaseATXCoverWhitePrefab, getPos(), getRot());
+                        else if (spawnId == "Glass_ATX") part = Instantiate(CaseATXCoverGlassPrefab, getPos(), getRot());
+                        else if (spawnId == "Cover_ITX(Black)") part = Instantiate(CaseITXCoverBlackPrefab, getPos(), getRot());
+                        else if (spawnId == "Cover_ITX(White)") part = Instantiate(CaseITXCoverWhitePrefab, getPos(), getRot());
+                        else if (spawnId == "Glass_ITX") part = Instantiate(CaseITXCoverGlassPrefab, getPos(), getRot());
+                        else if (spawnId == "Carrot") part = Instantiate(CarrotPrefab, getPos(), getRot());
+                        else if (spawnId == "Gift") part = Instantiate(GiftPrefab, getPos(), getRot());
+                        else if (spawnId == "BoxRemovalBomb") part = Instantiate(BoxRemovalBombPrefab, getPos(), getRot());
+                        else if (spawnId == "Apson_A3") part = Instantiate(ApsonA3Prefab, getPos(), getRot());
+                        else if (spawnId == "Bitcoin") part = Instantiate(BitcoinPrefab, getPos(), getRot());
+                        else if (spawnId == "MonitorStand") part = Instantiate(MonitorStandPrefab, getPos(), getRot());
+                        else if (spawnId == "CPU RMD Ryzen 9 7950X" || spawnId == "CPU i9-12900K" || spawnId == "CPU i7-14700K" || spawnId == "CPU i7-13700K" || spawnId == "CPU i7-8700K" || spawnId == "CPU i5-8400" || spawnId == "CPU i3-8300" || spawnId == "CPU Celeron G3920") part = Instantiate(CPUIntelPrefab, getPos(), getRot());
+                        else if (spawnId == "PSU 500W") part = Instantiate(psu500WPrefab, getPos(), getRot());
+                        else if (spawnId == "PSU 300W") part = Instantiate(psu300WPrefab, getPos(), getRot());
+                        else if (spawnId == "PSU 1kW") part = Instantiate(psu1000WPrefab, getPos(), getRot());
+                        else if (spawnId == "PSU 2kW") part = Instantiate(psu2000WPrefab, getPos(), getRot());
+
                         else {
                             part = GameObject.CreatePrimitive(PrimitiveType.Cube);
                             part.name = (string) obj["spawnId"];
@@ -135,6 +192,16 @@ public class OpenFileScript : MonoBehaviour, IPointerDownHandler
                     }
     }
 
+    #if UNITY_WEBGL
+    // Called from browser
+    public void OnFileUpload(string url) {
+        ReadFile(url);
+    }
+
+    [DllImport("__Internal")]
+    private static extern void UploadFile(string gameObjectName, string methodName, string filter, bool multiple);
+    #endif
+
     public void OnPointerDown(PointerEventData eventData)
     {
         if (eventData.button != PointerEventData.InputButton.Left) return;
@@ -147,6 +214,8 @@ public class OpenFileScript : MonoBehaviour, IPointerDownHandler
             if (string.IsNullOrEmpty(paths[0])) return;
             ReadFile(paths[0]);
         });
+        #elif UNITY_WEBGL
+        UploadFile(gameObject.name, "OnFileUpload", ".pc", false);
         #endif
     }
 }

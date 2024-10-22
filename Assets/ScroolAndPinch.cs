@@ -7,7 +7,7 @@ using UnityEngine;
 
 class ScroolAndPinch : MonoBehaviour
 {
-#if UNITY_IOS || UNITY_ANDROID || UNITY_WSA
+#if UNITY_IOS || UNITY_ANDROID || UNITY_WSA || UNITY_WEBGL // The game runs in a web browser, which has multiple input methods including keyboard and touch.
     public Camera Camera;
     public bool Rotate;
     protected Plane Plane;
