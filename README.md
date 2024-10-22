@@ -26,7 +26,7 @@ If you have a phone not powerful enough to run this save editor, or you are usin
 # Controls
 
 ## Touch
-**Supported in:** Android, UWP, iOS
+**Supported in:** Android, UWP, iOS, WebGL
 Hold 1 finger, then move it to move around the map,
 Hold 2 fingers, rotate it to rotate the camera, and pinch in to zoom in, and pinch out to zoom out.
 
